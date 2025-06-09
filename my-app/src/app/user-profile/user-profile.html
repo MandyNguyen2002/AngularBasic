@@ -1,0 +1,15 @@
+<p>user-profile works!</p>
+<label>Name</label>
+<input [(ngModel)]="name" />
+<label>Email</label>
+<input [(ngModel)]="email" />
+<label>Date Of Birth</label>
+<input [(ngModel)]="dob" />
+
+<button (click)="resetProfile()" [disabled]="checkInput">Reset</button>
+<button (click)="saveProfile()" [disabled]="checkInput">Save</button>
+
+<h3>User Profile</h3>
+<p>Name: {{ name }}</p>
+<p>Email: {{ email }}</p>
+<p>Date Of Birth: {{ dob }}</p>
