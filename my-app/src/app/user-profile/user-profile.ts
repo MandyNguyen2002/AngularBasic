@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
@@ -6,28 +7,32 @@ import { Component } from '@angular/core';
   templateUrl: './user-profile.html',
   styleUrl: './user-profile.scss'
 })
-export class UserProfile {
-name = ''
-email = ''
-dob = ''
+export class UserProfileComponent {
+  counter = 0;
 
-resetProfile() {
-  this.name = ''
-  this.email = ''
-  this.dob = ''
-}
+  userProfileForm = new FormGroup({
+    name: new FormControl(''),
+    email: new FormControl(''),
+    dob: new FormControl('')
+  });
 
-saveProfile() {
-  console.log('Saved Profile: ', {
-    name: this.name,
-    email: this.email,
-    dob: this.dob
-  })
 
-  alert('Profile Saved');
-}
+  get name(): string | null | undefined {
+    return this.userProfileForm.value.name;
+  }
+  get email(): string | null | undefined {
+    return this.userProfileForm.value.email;
+  }
+  get dob(): string | null | undefined {
+    return this.userProfileForm.value.dob;
+  }
 
-get checkInput() {
-  return !this.name || !this.email || !this.dob;
-}
+  saveProfile() {
+    this.counter++;
+    console.log('Saved profile:', this.userProfileForm.value);
+  }
+
+  resetProfile() {
+    this.userProfileForm.reset();
+  }
 }

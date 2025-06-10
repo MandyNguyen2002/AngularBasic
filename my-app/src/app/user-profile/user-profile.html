@@ -1,13 +1,23 @@
-<p>user-profile works!</p>
-<label>Name</label>
-<input [(ngModel)]="name" />
-<label>Email</label>
-<input [(ngModel)]="email" />
-<label>Date Of Birth</label>
-<input [(ngModel)]="dob" />
+<h1 *ngIf="name">Welcome, {{ name }}!</h1>
 
-<button (click)="resetProfile()" [disabled]="checkInput">Reset</button>
-<button (click)="saveProfile()" [disabled]="checkInput">Save</button>
+<form [formGroup]="userProfileForm">
+  <label>Name</label>
+  <input formControlName="name" type="text" />
+
+  <label>Email</label>
+  <input formControlName="email" type="email" />
+
+  <label>Date of Birth</label>
+  <input formControlName="dob" type="date" />
+
+  <br />
+  <button (click)="saveProfile()" [disabled]="!name || !email || !dob">
+    Save
+  </button>
+  <button (click)="resetProfile()" [disabled]="!name && !email && !dob">
+    Reset
+  </button>
+</form>
 
 <h3>User Profile</h3>
 <p>Name: {{ name }}</p>
