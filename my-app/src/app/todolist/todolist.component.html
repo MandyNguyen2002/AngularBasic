@@ -1,0 +1,56 @@
+<h2>Todo List</h2>
+
+<label for="statusFilter">Filter by Status:</label>
+<select id="statusFilter" [(ngModel)]="filterStatus">
+  <option *ngFor="let status of statuses">{{ status }}</option>
+</select>
+
+<h3>Add New Task</h3>
+<form (ngSubmit)="addTask()">
+  <input
+    [(ngModel)]="newTask.title"
+    name="title"
+    placeholder="Title"
+    required
+  />
+  <input
+    [(ngModel)]="newTask.description"
+    name="description"
+    placeholder="Description"
+  />
+  <input [(ngModel)]="newTask.dueDate" name="dueDate" type="date" />
+  <select [(ngModel)]="newTask.status" name="status">
+    <option>Incomplete</option>
+    <option>In Progress</option>
+    <option>Completed</option>
+  </select>
+  <select [(ngModel)]="newTask.priority" name="priority">
+    <option>Low</option>
+    <option>Medium</option>
+    <option>High</option>
+  </select>
+  <button type="submit">Add Task</button>
+</form>
+
+<hr />
+
+<ul>
+  <li
+    *ngFor="let task of filteredTasks"
+    appHoverBackground
+    [style.border]="isOverdue(task) ? '2px solid red' : '1px solid #ddd'"
+    style="margin-bottom: 1em; padding: 1em; border-radius: 5px"
+  >
+    <h4>{{ task.title }}</h4>
+    <p>{{ task.description }}</p>
+    <p>
+      Due:
+      <span [style.color]="isOverdue(task) ? 'red' : 'inherit'">
+        {{ task.dueDate | date : "yyyy-MM-dd" }}
+        <span *ngIf="isOverdue(task)"><b>(Overdue!)</b></span>
+      </span>
+    </p>
+    <p>Status: {{ task.status }}</p>
+    <p>Priority: {{ task.priority }}</p>
+  </li>
+</ul>

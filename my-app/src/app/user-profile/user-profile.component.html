@@ -1,0 +1,25 @@
+<h1>Welcome, {{ name }}!</h1>
+
+<form [formGroup]="userProfileForm">
+  <label>Name</label>
+  <input formControlName="name" type="text" />
+
+  <label>Email</label>
+  <input formControlName="email" type="email" />
+
+  <label>Date of Birth</label>
+  <input formControlName="dob" type="date" />
+
+  <br />
+  <button (click)="saveProfile()" [disabled]="!name || !email || !dob">
+    Save
+  </button>
+  <button (click)="resetProfile()" [disabled]="!name && !email && !dob">
+    Reset
+  </button>
+</form>
+
+<h3>User Profile</h3>
+<p>Name: {{ name }}</p>
+<p>Email: {{ email }}</p>
+<p>Date Of Birth: {{ dob }}</p>
