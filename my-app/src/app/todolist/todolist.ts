@@ -128,9 +128,9 @@ export class Todolist {
 
   this.tasks.push({
     id: newId,
-    title: formValue.title!, // assert it's not null since form is valid
+    title: formValue.title!, 
     description: formValue.description || '',
-    dueDate: new Date(formValue.dueDate!), // form is valid, so it will exist
+    dueDate: new Date(formValue.dueDate!), 
     status: formValue.status!,
     priority: formValue.priority!
   });
