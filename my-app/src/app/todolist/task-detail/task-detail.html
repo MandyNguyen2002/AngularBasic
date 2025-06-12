@@ -1,0 +1,26 @@
+<p>task-detail works!</p>
+<div *ngIf="!isEditing">
+  <h3>{{ task.title }}</h3>
+  <p>Description: {{ task.description }}</p>
+  <p>Due Date: {{ task.dueDate | date }}</p>
+  <p>Status: {{ task.status }}</p>
+  <p>Priority: {{ task.priority }}</p>
+  <button (click)="startEdit()">Edit</button>
+</div>
+
+<div *ngIf="isEditing">
+  <input [(ngModel)]="task.title" />
+  <input [(ngModel)]="task.description" />
+  <input type="date" [(ngModel)]="task.dueDate" />
+  <select [(ngModel)]="task.status">
+    <option>Incomplete</option>
+    <option>In Progress</option>
+    <option>Completed</option>
+  </select>
+  <select [(ngModel)]="task.priority">
+    <option>High</option>
+    <option>Medium</option>
+    <option>Low</option>
+  </select>
+  <button (click)="saveEdit()">Save</button>
+</div>

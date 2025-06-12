@@ -7,6 +7,8 @@ import { UserProfileComponent } from './user-profile/user-profile';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Todolist } from './todolist/todolist';
 import { HoverBackground } from './todolist/hover-background';
+import { TaskDetail } from './todolist/task-detail/task-detail';
+import { FilterPipe } from './todolist/filter-pipe';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { HoverBackground } from './todolist/hover-background';
     App,
     UserProfileComponent,
     Todolist,
-    HoverBackground
+    HoverBackground,
+    TaskDetail,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 
@@ -99,55 +100,52 @@ export class Todolist {
       priority: 'High',
     },
   ];
+   filterStatus = 'All';
   currentDate = new Date();
+
   statuses = ['All', 'Incomplete', 'In Progress', 'Completed'];
-  filterStatus = 'All';
-  newTask: any = {
+
+  taskForm = new FormGroup({
+    title: new FormControl('', Validators.required),
+    description: new FormControl(''),
+    dueDate: new FormControl(new Date().toISOString().substring(0, 10)),
+    status: new FormControl('Incomplete'),
+    priority: new FormControl('Medium'),
+  });
+
+  get title() { return this.taskForm.get('title')?.value; }
+  get description() { return this.taskForm.get('description')?.value; }
+  get dueDate() { return this.taskForm.get('dueDate')?.value; }
+  get status() { return this.taskForm.get('status')?.value; }
+  get priority() { return this.taskForm.get('priority')?.value; }
+
+  addTask() {
+  if (!this.taskForm.valid) return;
+
+  const formValue = this.taskForm.value;
+
+  const newId = this.tasks.reduce((max, t) => t.id > max ? t.id : max, 0) + 1;
+
+  this.tasks.push({
+    id: newId,
+    title: formValue.title!, // assert it's not null since form is valid
+    description: formValue.description || '',
+    dueDate: new Date(formValue.dueDate!), // form is valid, so it will exist
+    status: formValue.status!,
+    priority: formValue.priority!
+  });
+
+  this.taskForm.reset({
     title: '',
     description: '',
-    dueDate: new Date(),
+    dueDate: new Date().toISOString().substring(0, 10),
     status: 'Incomplete',
-    priority: 'Medium',
-  };
+    priority: 'Medium'
+  });
+}
+
   isOverdue(task: any): boolean {
     return task.dueDate < this.currentDate && task.status !== 'Completed';
-  }
-  get filteredTasks(): any[] {
-    if (this.filterStatus === 'All') {
-      return this.tasks;
-    }
-    return this.tasks.filter((t) => t.status === this.filterStatus);
-  }
-  addTask() {
-    if (!this.newTask.title) {
-      return;
-    }
-
-    let highestId = 0;
-    for (let i = 0; i < this.tasks.length; i++) {
-      if (this.tasks[i].id > highestId) {
-        highestId = this.tasks[i].id;
-      }
-    }
-
-    let newId = highestId + 1;
-
-    let taskToAdd = {
-      id: newId,
-      title: this.newTask.title,
-      description: this.newTask.description,
-      dueDate: this.newTask.dueDate,
-      status: this.newTask.status,
-      priority: this.newTask.priority,
-    };
-
-    this.tasks.push(taskToAdd);
-
-    this.newTask.title = '';
-    this.newTask.description = '';
-    this.newTask.dueDate = new Date();
-    this.newTask.status = 'Incomplete';
-    this.newTask.priority = 'Medium';
   }
 }
 
