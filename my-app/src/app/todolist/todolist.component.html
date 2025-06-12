@@ -101,6 +101,9 @@
 <hr />
 
 <div *ngFor="let task of tasks | filter : filterStatus">
-  <app-task-detail [task]="task"></app-task-detail>
+  <app-task-detail
+    [task]="task"
+    (saveClicked)="handleSave($event)"
+  ></app-task-detail>
   <hr />
 </div>

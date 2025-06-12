@@ -144,6 +144,13 @@ export class Todolist {
   });
 }
 
+handleSave(updatedTask: any) {
+  const index = this.tasks.findIndex(t => t.id === updatedTask.id);
+  if (index !== -1) {
+    this.tasks[index] = { ...updatedTask }; 
+  }
+}
+
   isOverdue(task: any): boolean {
     return task.dueDate < this.currentDate && task.status !== 'Completed';
   }

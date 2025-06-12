@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class TaskDetail {
 @Input() task: any;
+@Output() saveClicked = new EventEmitter<any>();
 isEditing = false;
 
 startEdit() {
@@ -16,6 +17,7 @@ startEdit() {
 
 saveEdit() {
   this.isEditing = false
+  this.saveClicked.emit(this.task);
 }
 
 }
