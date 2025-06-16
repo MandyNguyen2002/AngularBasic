@@ -9,6 +9,8 @@ import { Todolist } from './todolist/todolist';
 import { HoverBackground } from './todolist/hover-background';
 import { TaskDetail } from './todolist/task-detail/task-detail';
 import { FilterPipe } from './todolist/filter-pipe';
+import { ProductComponent } from './product/product';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -18,13 +20,17 @@ import { FilterPipe } from './todolist/filter-pipe';
     Todolist,
     HoverBackground,
     TaskDetail,
-    FilterPipe
+    FilterPipe,
+    ProductComponent,
+   
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners()
