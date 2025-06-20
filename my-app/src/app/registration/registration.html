@@ -1,0 +1,32 @@
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+  <label>Username:</label>
+  <input formControlName="username" />
+  <div *ngIf="f['username'].errors?.['minlength']">Minimum 3 characters</div>
+
+  <label>Email:</label>
+  <input formControlName="email" />
+  <div *ngIf="f['email'].errors?.['email']">Invalid email format</div>
+
+  <label>Password:</label>
+  <input type="password" formControlName="password" />
+
+  <label>Confirm Password:</label>
+  <input type="password" formControlName="confirmPassword" />
+  <div *ngIf="registrationForm.errors?.['mismatch']">
+    Passwords do not match
+  </div>
+
+  <label>Preferred Contact Method:</label>
+  <select formControlName="contactMethod">
+    <option>Email</option>
+    <option>Phone</option>
+  </select>
+
+  <label>Phone Number:</label>
+  <input formControlName="phone" />
+  <div *ngIf="f['phone'].invalid && f['contactMethod'].value === 'Phone'">
+    Phone number is required
+  </div>
+
+  <button type="submit" [disabled]="registrationForm.invalid">Register</button>
+</form>

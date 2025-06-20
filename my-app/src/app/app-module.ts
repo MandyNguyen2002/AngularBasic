@@ -11,6 +11,7 @@ import { TaskDetail } from './todolist/task-detail/task-detail';
 import { FilterPipe } from './todolist/filter-pipe';
 import { ProductComponent } from './product/product';
 import { HttpClientModule } from '@angular/common/http';
+import { Registration } from './registration/registration';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     TaskDetail,
     FilterPipe,
     ProductComponent,
+    Registration,
    
     
   ],
